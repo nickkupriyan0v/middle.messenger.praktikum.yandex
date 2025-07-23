@@ -1,3 +1,4 @@
+import "./base.scss";
 import Handlerbars from "handlebars";
 
 export default class App {
