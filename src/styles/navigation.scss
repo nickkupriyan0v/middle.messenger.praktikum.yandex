@@ -1,0 +1,8 @@
+@use "./constants.scss";
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: constants.$gap;
+}
