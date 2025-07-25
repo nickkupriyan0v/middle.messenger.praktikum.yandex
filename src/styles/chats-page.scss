@@ -1,0 +1,58 @@
+@use "./constants.scss";
+
+.chats-page {
+  flex: 1;
+  padding: 20px;
+  display: grid;
+  gap: constants.$gap_x2;
+  grid-template-columns: 360px 1fr;
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .chat-list {
+    flex: 1;
+  }
+
+  .chat-messages {
+    background-color: constants.$bg_color;
+    padding: constants.$padding;
+    border-radius: constants.$border_radius;
+    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: constants.$gap;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    align-items: center;
+    gap: constants.$gap;
+
+    .button {
+      flex: 1;
+    }
+  }
+
+  .chat-area {
+    display: flex;
+    flex-direction: column;
+    gap: constants.$gap;
+  }
+
+  .input-container {
+    display: flex;
+    align-content: center;
+    gap: constants.$gap;
+
+    .input-group {
+      flex: 1;
+    }
+    .my-button {
+      width: 40px;
+    }
+  }
+}

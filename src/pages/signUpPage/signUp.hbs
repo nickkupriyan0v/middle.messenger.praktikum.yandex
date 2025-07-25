@@ -1,0 +1,20 @@
+<main class="forms-page">
+  <div class="forms-container">
+    <header>
+      <h1 class="form-title">{{title}}</h1>
+    </header>
+    <form class="my_form">
+      {{>Input name="email" label="Почта"}}
+      {{>Input name="login" label="Логин"}}
+      {{>Input name="first-name" label="Имя"}}
+      {{>Input name="second-name" label="Фамилия"}}
+      {{>Input name="password" label="Пароль" type="password"}}
+      {{>Input name="repeat-password" label="Повторите пароль" type="password"}}
+
+      {{>Button text="Зарегистрироваться" id="sign-up"}}
+    </form>
+    <footer>
+      {{> Link id="sign-in" text="Вход"}}
+    </footer>
+  </div>
+</main>
