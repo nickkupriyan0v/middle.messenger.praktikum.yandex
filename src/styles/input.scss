@@ -1,0 +1,13 @@
+@use "./constants.scss";
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .my-input {
+    background-color: constants.$bg_color;
+    padding: constants.$padding;
+    border-radius: constants.$border_radius;
+  }
+}
