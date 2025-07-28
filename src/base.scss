@@ -1,21 +1,13 @@
 @use "./styles/reset.scss";
 
-@use "./styles/input.scss";
-@use "./styles/button.scss";
-@use "./styles/avatar.scss";
-@use "./styles/link.scss";
+@use "./styles/constants.scss";
 
-@use "./styles/profile-row.scss";
-@use "./styles/chat-item.scss";
-@use "./styles/message-item.scss";
-@use "./styles/navigation.scss";
 
-@use "./styles/error-page.scss";
-@use "./styles/forms-page.scss";
+
 @use "./styles/chats-page.scss";
 
 body {
-  background-color: #eceef0;
+  background-color: constants.$main_bg_color;
   margin: initial;
   padding: initial;
   min-height: 100vh;

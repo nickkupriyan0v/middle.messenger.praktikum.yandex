@@ -1,3 +1,5 @@
+import "../styles/chat-item.scss";
+
 export default `
     <article class="chat-item">
         {{> Avatar letter="И" }}

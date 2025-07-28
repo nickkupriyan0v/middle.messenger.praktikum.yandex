@@ -1,3 +1,5 @@
+import "../styles/navigation.scss";
+
 export default `
     <nav class=navigation>
         {{> Link id="404-page" text="404"}}

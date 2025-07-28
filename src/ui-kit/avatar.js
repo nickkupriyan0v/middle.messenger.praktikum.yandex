@@ -1,3 +1,5 @@
+import "../styles/avatar.scss";
+
 export default `
     <div class="my-avatar {{#if editable}}editable{{/if}}">
         <span class="letter">
