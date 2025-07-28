@@ -1,0 +1,17 @@
+<main class="forms-page profile-page">
+  <div class="forms-container">
+    {{> Avatar letter="Н" editable=true }}
+
+    <form class="my_form">
+      {{>Input name="email" label="Почта" type="email"}}
+      {{>Input name="login" label="Логин"}}
+      {{>Input name="first_name" label="Имя"}}
+      {{>Input name="second_name" label="Фамилия"}}
+      {{>Input name="display_name" label="Имя в чате"}}
+      {{>Input name="phone" label="Телефон" type="phone"}}
+
+      {{>Button text="Сохранить" id="save-profile" type="submit"}}
+    </form>
+  </div>
+  {{> Link id="go-to-chats" text="К чатам"}}
+</main>

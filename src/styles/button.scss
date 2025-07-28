@@ -1,0 +1,13 @@
+@use "./constants.scss";
+
+.my-button {
+  background-color: constants.$main_color;
+  padding: constants.$padding;
+  border-radius: constants.$border_radius;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: constants.$hover_color;
+  }
+}

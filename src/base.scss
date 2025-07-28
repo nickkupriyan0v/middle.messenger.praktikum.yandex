@@ -1,0 +1,23 @@
+@use "./styles/reset.scss";
+
+@use "./styles/constants.scss";
+
+
+
+@use "./styles/chats-page.scss";
+
+body {
+  background-color: constants.$main_bg_color;
+  margin: initial;
+  padding: initial;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Mono", monospace;
+
+  #app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
