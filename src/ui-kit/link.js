@@ -1,3 +1,5 @@
+import "../styles/link.scss";
+
 export default `
     <a
         class="my-link"

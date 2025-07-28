@@ -102,6 +102,8 @@ export default class App {
     listenClick("change-profile", () => this.renderChangeProfilePage());
     listenClick("logout", () => this.renderSignInPage());
     listenClick("go-to-chats", () => this.renderChatPage());
+
+    this.listenAvatar();
   }
 
   renderChangePasswordPage() {
@@ -109,6 +111,8 @@ export default class App {
 
     listenClick("save-password", () => this.renderProfilePage());
     listenClick("go-to-chats", () => this.renderChatPage());
+
+    this.listenAvatar();
   }
 
   renderChangeProfilePage() {
@@ -116,5 +120,28 @@ export default class App {
 
     listenClick("save-profile", () => this.renderProfilePage());
     listenClick("go-to-chats", () => this.renderChatPage());
+
+    this.listenAvatar();
+  }
+
+  listenAvatar() {
+    const avatarInput = document.getElementById("avatar-uploader-input");
+    const avatarUploader = document.getElementById("avatar-uploader");
+
+    avatarUploader.addEventListener("click", (event) => {
+      avatarInput.click();
+    });
+
+    avatarInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = ({ target }) => {
+        const img = avatarUploader.querySelector("img");
+        img.src = target.result;
+        img.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    });
   }
 }

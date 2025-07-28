@@ -1,7 +1,9 @@
+import "../styles/input.scss";
+
 export default `
-  <div class="input-group">
+  <label class="input-group">
     {{#if label}}
-      <label for="{{name}}">{{label}}</label>
+      <span>{{label}}</span>
     {{/if}}
     <input
       {{#if placeholder}}
@@ -11,5 +13,5 @@ export default `
       name="{{name}}"
       type="{{safeVal type 'text'}}"
       class="my-input" />
-  </div>
+  </label>
 `;

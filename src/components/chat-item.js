@@ -1,3 +1,5 @@
+import "../styles/chat-item.scss";
+
 export default `
     <article class="chat-item">
         {{> Avatar letter="И" }}
@@ -12,4 +14,4 @@ export default `
             </div>
         </div>
     </article>
-`
+`;
