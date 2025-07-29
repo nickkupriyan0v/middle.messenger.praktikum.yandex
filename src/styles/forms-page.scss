@@ -1,4 +1,4 @@
-@use "./constants.scss";
+@use "./constants";
 
 .forms-page {
   flex: 1;
@@ -10,9 +10,9 @@
     width: 400px;
     display: flex;
     flex-direction: column;
-    gap: constants.$gap_x2;
+    gap: constants.$gap-x2;
 
-    .my_form {
+    .my-form {
       display: flex;
       flex-direction: column;
       gap: constants.$gap;

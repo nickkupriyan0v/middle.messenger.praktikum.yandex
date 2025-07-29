@@ -1,14 +1,14 @@
-@use "./constants.scss";
+@use "./constants";
 
 .my-avatar {
   width: 48px;
   aspect-ratio: 1;
-  border-radius: constants.$border_radius;
-  background-color: constants.$bg_secondary;
+  border-radius: constants.$border-radius;
+  background-color: constants.$bg-secondary;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: constants.$main_color;
+  color: constants.$main-color;
   font-weight: bold;
   font-size: 20px;
   overflow: hidden;

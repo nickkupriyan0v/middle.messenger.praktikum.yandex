@@ -1,11 +1,10 @@
-@use "./constants.scss";
+@use "./constants";
 
 .chat-item {
   display: flex;
-  border-radius: 20px;
-  background-color: constants.$main_color;
+  background-color: constants.$main-color;
   padding: constants.$padding;
-  border-radius: constants.$border_radius;
+  border-radius: constants.$border-radius;
 
   .chat-info {
     flex: 1;
@@ -28,7 +27,7 @@
 
   .chat-time {
     font-size: 12px;
-    color: constants.$secondary_text_color;
+    color: constants.$secondary-text-color;
   }
 
   .chat-preview {
@@ -39,7 +38,7 @@
 
   .last-message {
     font-size: 14px;
-    color: constants.$secondary_text_color;
+    color: constants.$secondary-text-color;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -47,7 +46,7 @@
   }
 
   .badge {
-    background-color: constants.$bg_thirst;
+    background-color: constants.$bg-thirst;
     color: white;
     font-size: 12px;
     font-weight: 600;
@@ -66,6 +65,6 @@
 
   &:hover {
     cursor: pointer;
-    background-color: constants.$hover_color;
+    background-color: constants.$hover-color;
   }
 }

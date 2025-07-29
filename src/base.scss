@@ -1,13 +1,9 @@
-@use "./styles/reset.scss";
-
-@use "./styles/constants.scss";
-
-
-
-@use "./styles/chats-page.scss";
+@use "./styles/reset";
+@use "./styles/constants";
+@use "./styles/chats-page";
 
 body {
-  background-color: constants.$main_bg_color;
+  background-color: constants.$main-bg-color;
   margin: initial;
   padding: initial;
   min-height: 100vh;

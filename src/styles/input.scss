@@ -1,4 +1,4 @@
-@use "./constants.scss";
+@use "./constants";
 
 .input-group {
   display: flex;
@@ -6,8 +6,8 @@
   gap: 2px;
 
   .my-input {
-    background-color: constants.$main_color;
+    background-color: constants.$main-color;
     padding: constants.$padding;
-    border-radius: constants.$border_radius;
+    border-radius: constants.$border-radius;
   }
 }

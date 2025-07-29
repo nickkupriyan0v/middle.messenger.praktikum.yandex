@@ -1,13 +1,13 @@
-@use "./constants.scss";
+@use "./constants";
 
 .my-button {
-  background-color: constants.$main_color;
+  background-color: constants.$main-color;
   padding: constants.$padding;
-  border-radius: constants.$border_radius;
+  border-radius: constants.$border-radius;
   width: 100%;
 
   &:hover {
     cursor: pointer;
-    background-color: constants.$hover_color;
+    background-color: constants.$hover-color;
   }
 }
