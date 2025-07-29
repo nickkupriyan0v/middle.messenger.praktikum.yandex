@@ -1,8 +1,12 @@
 import Handlebars from "handlebars";
 
-export const renderTemplate = (element: HTMLElement | null, rawTemplate: string, options = {}) => {
+export const renderTemplate = (
+  element: HTMLElement | null,
+  rawTemplate: string,
+  options = {}
+): void => {
   if (!element) {
-    return
+    return;
   }
   const template = Handlebars.compile(rawTemplate);
   element.innerHTML = template(options);

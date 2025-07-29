@@ -45,12 +45,12 @@ export default class App {
     this.appElement = document.getElementById("app");
   }
 
-  render() {
+  render(): void {
     this.renderHeader();
     this.renderSignInPage();
   }
 
-  renderHeader() {
+  renderHeader(): void {
     renderTemplate(this.headerElement, Navigation);
 
     listenClick("404-page", () => this.render404Page());
@@ -63,12 +63,12 @@ export default class App {
     listenClick("change-password-page", () => this.renderChangePasswordPage());
   }
 
-  renderChatPage() {
+  renderChatPage(): void {
     renderTemplate(this.appElement, ChatsPage, { chatItems, messageItems });
     listenClick("profile", () => this.renderProfilePage());
   }
 
-  render404Page() {
+  render404Page(): void {
     renderTemplate(this.appElement, ErrorPage, {
       code: "404",
       text: "Вы вошли не в ту дверь",
@@ -76,7 +76,7 @@ export default class App {
     listenClick("home-link", () => this.renderChatPage());
   }
 
-  render500Page() {
+  render500Page(): void {
     renderTemplate(this.appElement, ErrorPage, {
       code: "500",
       text: "Наташ, мы там все уронили",
@@ -84,21 +84,21 @@ export default class App {
     listenClick("home-link", () => this.renderChatPage());
   }
 
-  renderSignInPage() {
+  renderSignInPage(): void {
     renderTemplate(this.appElement, SignInPage, { title: "Вход" });
 
     listenClick("sign-in", () => this.renderChatPage());
     listenClick("sign-up", () => this.renderSignUpPage());
   }
 
-  renderSignUpPage() {
+  renderSignUpPage(): void {
     renderTemplate(this.appElement, SignUpPage, { title: "Регистрация" });
 
     listenClick("sign-up", () => this.renderChatPage());
     listenClick("sign-in", () => this.renderSignInPage());
   }
 
-  renderProfilePage() {
+  renderProfilePage(): void {
     renderTemplate(this.appElement, ProfilePage);
 
     listenClick("change-password", () => this.renderChangePasswordPage());
@@ -109,7 +109,7 @@ export default class App {
     this.listenAvatar();
   }
 
-  renderChangePasswordPage() {
+  renderChangePasswordPage(): void {
     renderTemplate(this.appElement, ChangePasswordPage);
 
     listenClick("save-password", () => this.renderProfilePage());
@@ -118,7 +118,7 @@ export default class App {
     this.listenAvatar();
   }
 
-  renderChangeProfilePage() {
+  renderChangeProfilePage(): void {
     renderTemplate(this.appElement, ChangeProfilePage);
 
     listenClick("save-profile", () => this.renderProfilePage());
@@ -127,11 +127,11 @@ export default class App {
     this.listenAvatar();
   }
 
-  listenAvatar() {
+  listenAvatar(): void {
     const avatarInput = document.getElementById("avatar-uploader-input");
     const avatarUploader = document.getElementById("avatar-uploader");
     if (!avatarInput || !avatarUploader) {
-      return
+      return;
     }
 
     avatarUploader.addEventListener("click", () => {
@@ -145,7 +145,7 @@ export default class App {
       }
 
       const reader = new FileReader();
-      reader.onload = ({ target }) => {
+      reader.onload = ({ target }): void => {
         if (target) {
           const img = avatarUploader.querySelector("img");
           if (img) {
