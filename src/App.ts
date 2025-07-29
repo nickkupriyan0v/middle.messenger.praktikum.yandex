@@ -12,12 +12,12 @@ import MessageItem from "./components/message-item.js";
 import Navigation from "./components/navigation.js";
 
 import { ChatsPage } from "./pages/chatsPage/index.js";
-import { ErrorPage } from "./pages/errorPage";
-import { SignInPage } from "./pages/signInPage";
-import { SignUpPage } from "./pages/signUpPage";
-import { ProfilePage } from "./pages/profilePage";
-import { ChangePasswordPage } from "./pages/changePasswordPage";
-import { ChangeProfilePage } from "./pages/changeProfilePage";
+import { ErrorPage } from "./pages/errorPage/index.js";
+import { SignInPage } from "./pages/signInPage/index.js";
+import { SignUpPage } from "./pages/signUpPage/index.js";
+import { ProfilePage } from "./pages/profilePage/index.js";
+import { ChangePasswordPage } from "./pages/changePasswordPage/index.js";
+import { ChangeProfilePage } from "./pages/changeProfilePage/index.js";
 
 import chatItems from "./mock/chatItems.js";
 import messageItems from "./mock/messageItems.js";
@@ -37,6 +37,9 @@ Handlebars.registerPartial("ProfileRow", ProfileRow);
 Handlebars.registerPartial("ChatItem", ChatItem);
 Handlebars.registerPartial("MessageItem", MessageItem);
 export default class App {
+  headerElement: HTMLElement | null;
+  appElement: HTMLElement | null;
+
   constructor() {
     this.headerElement = document.getElementById("header");
     this.appElement = document.getElementById("app");
@@ -127,19 +130,29 @@ export default class App {
   listenAvatar() {
     const avatarInput = document.getElementById("avatar-uploader-input");
     const avatarUploader = document.getElementById("avatar-uploader");
+    if (!avatarInput || !avatarUploader) {
+      return
+    }
 
-    avatarUploader.addEventListener("click", (event) => {
+    avatarUploader.addEventListener("click", () => {
       avatarInput.click();
     });
 
     avatarInput.addEventListener("change", (event) => {
-      const file = event.target.files[0];
+      const file = (event.target as HTMLInputElement)?.files?.[0];
+      if (!file) {
+        return;
+      }
 
       const reader = new FileReader();
       reader.onload = ({ target }) => {
-        const img = avatarUploader.querySelector("img");
-        img.src = target.result;
-        img.style.display = "block";
+        if (target) {
+          const img = avatarUploader.querySelector("img");
+          if (img) {
+            img.src = target.result as string;
+            img.style.display = "block";
+          }
+        }
       };
       reader.readAsDataURL(file);
     });
