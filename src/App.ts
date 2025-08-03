@@ -1,15 +1,15 @@
 import Handlebars from "handlebars";
 import safeVal from "./helpers/safeVal.js";
 
-import Button from "./ui-kit/button.js";
-import Input from "./ui-kit/input.js";
-import Avatar from "./ui-kit/avatar.js";
-import Link from "./ui-kit/link.js";
+import Button from "./components/button.js";
+import Input from "./components/input.js";
+import Avatar from "./components/avatar.js";
+import Link from "./components/link.js";
 
-import ProfileRow from "./components/profile-row.js";
-import ChatItem from "./components/chat-item.js";
-import MessageItem from "./components/message-item.js";
-import Navigation from "./components/navigation.js";
+import ProfileRow from "./blocks/profile-row.js";
+import ChatItem from "./blocks/chat-item.js";
+import MessageItem from "./blocks/message-item.js";
+import Navigation from "./blocks/navigation.js";
 
 import { ChatsPage } from "./pages/chatsPage/index.js";
 import { ErrorPage } from "./pages/errorPage/index.js";
