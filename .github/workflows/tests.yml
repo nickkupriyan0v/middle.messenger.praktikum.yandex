@@ -30,44 +30,6 @@ jobs:
     - name: Get testing lib
       run: set -eu && git clone https://github.com/Yandex-Practicum/tests-middle-frontend.git /tmp/tests-middle-frontend
 
-    - name: Start server
-      run: |
-        npm install
-        npm run start > server.log 2>&1 &
-        echo $! > server.pid
-        
-        check_port() {
-          ss -lnt | awk '{print $4}' | grep -q ':3000$'
-        }
-        
-        for i in {1..30}; do
-          if check_port; then
-            echo "Port 3000 is open"
-            break
-          fi
-          sleep 2
-        done
-        
-        for i in {1..30}; do
-          if curl -s http://localhost:3000 >/dev/null; then
-            echo "Server responded successfully"
-            exit 0
-          fi
-          sleep 2
-        done
-        
-        echo "Server startup timed out"
-        exit 1
-
-    - name: Check server status
-      run: |
-        echo "Server status:"
-        curl -I http://localhost:3000
-        echo -e "\nNetwork status:"
-        ss -lnt | grep ':3000' || true
-        echo -e "\nProcess status:"
-        ps -p $(cat server.pid) || true
-
     - name: Run tests (sprint_1)
       if: ${{github.head_ref >= 'sprint_1'}}
       run: bats --formatter pretty /tmp/tests-middle-frontend/tests/sprint_1.bats
@@ -86,13 +48,3 @@ jobs:
 
     - name: Run tests (server)
       run: bats --formatter pretty /tmp/tests-middle-frontend/tests/node_build.bats
-      
-    - name: Stop server
-      if: always()
-      run: |
-        if [ -f server.pid ]; then
-          kill -9 $(cat server.pid) || true
-          rm server.pid
-        fi
-        echo "--- Server logs ---"
-        cat server.log || true
