@@ -30,6 +30,26 @@ jobs:
     - name: Get testing lib
       run: set -eu && git clone https://github.com/Yandex-Practicum/tests-middle-frontend.git /tmp/tests-middle-frontend
 
+    - name: Start server
+      run: |
+        npm install
+        npm run start > server.log 2>&1 &
+        echo $! > server.pid
+        sleep 5  # Начальная задержка для инициализации
+        
+        # Ожидаем готовности сервера
+        timeout 120 bash -c '
+          while ! netstat -lnt | awk \'$4 ~ /:3000$/{exit 0}\'; do sleep 2; done
+          while ! curl -s http://localhost:3000; do sleep 2; done
+        '
+
+    - name: Check server status
+      run: |
+        echo "Checking server status:"
+        curl -I http://localhost:3000
+        netstat -lnt | grep ':3000'
+        pgrep -F server.pid || echo "Server process not found"
+
     - name: Run tests (sprint_1)
       if: ${{github.head_ref >= 'sprint_1'}}
       run: bats --formatter pretty /tmp/tests-middle-frontend/tests/sprint_1.bats
@@ -48,3 +68,13 @@ jobs:
 
     - name: Run tests (server)
       run: bats --formatter pretty /tmp/tests-middle-frontend/tests/node_build.bats
+      
+    - name: Stop server
+      if: always()
+      run: |
+        if [ -f server.pid ]; then
+          kill -9 $(cat server.pid) || true
+          rm server.pid
+        fi
+        echo "--- Server logs ---"
+        cat server.log || true
