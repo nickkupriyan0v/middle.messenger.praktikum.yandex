@@ -1,7 +1,7 @@
-import EventBus from "../eventBus/index.ts";
-import { v4 as makeUUID } from "uuid";
-import Handlebars from "handlebars";
-import { type TBlockChildren, type IBlockMeta, type IBlockProps, BlockEvents } from "./types.ts";
+import EventBus from '../eventBus/index.ts';
+import { v4 as makeUUID } from 'uuid';
+import Handlebars from 'handlebars';
+import { type TBlockChildren, type IBlockMeta, type IBlockProps, BlockEvents } from './types.ts';
 
 class Block {
   protected meta: IBlockMeta;
@@ -11,7 +11,7 @@ class Block {
 
   children: TBlockChildren<Block> = {};
 
-  constructor(tagName = "div", propsAndChildren: IBlockProps = {}) {
+  constructor(tagName = 'div', propsAndChildren: IBlockProps = {}) {
     this.eventBus = new EventBus();
     this.id = makeUUID();
     const { props, children } = this.#getChildren(propsAndChildren);
@@ -21,11 +21,11 @@ class Block {
       props: this.#makePropsProxy({ ...props, id: this.id }),
     };
     this.#registerEvents();
-    this.eventBus.emit(BlockEvents.Init);
+    this.eventBus.emit(BlockEvents.init);
   }
 
   #registerEvents(): void {
-    this.eventBus.on(BlockEvents.Init, this.#init.bind(this));
+    this.eventBus.on(BlockEvents.init, this.#init.bind(this));
     this.eventBus.on(
       BlockEvents.flowCdm,
       this.#componentDidMount.bind(this),
@@ -41,13 +41,13 @@ class Block {
   #createResources(): void {
     const { tagName, props } = this.meta;
     const element = document.createElement(tagName);
-    if (typeof props.className === "string") {
-      const classes = props.className.split(" ").filter(Boolean);
+    if (typeof props.className === 'string') {
+      const classes = props.className.split(' ').filter(Boolean);
       if (classes.length) element.classList.add(...classes);
     }
-    if (typeof props.attrs === "object" && props.attrs !== null) {
+    if (typeof props.attrs === 'object' && props.attrs !== null) {
       Object.entries(props.attrs).forEach(([attr, value]) => {
-        if (typeof value === "string") {
+        if (typeof value === 'string') {
           element.setAttribute(attr, value);
         }
       });
@@ -57,7 +57,7 @@ class Block {
 
   #render(): void {
     if (!this.element) {
-      throw new Error("Element is not created");
+      throw new Error('Element is not created');
     }
     const newElement = this.render();
     if (this.element.children.length === 0) {
@@ -72,7 +72,7 @@ class Block {
   #componentUpdate(oldProps: IBlockProps): void {
     const newProps = this.meta.props;
     if (JSON.stringify(oldProps) !== JSON.stringify(newProps)) {
-      if (typeof this.shouldComponentUpdate === "function") {
+      if (typeof this.shouldComponentUpdate === 'function') {
         if (!this.shouldComponentUpdate()) {
           return;
         }
@@ -150,19 +150,19 @@ class Block {
     return this.element!;
   }
 
-  protected compile(template: string, props: Record<string, unknown>): DocumentFragment {
+  protected compile(template: string, props: Record<string, unknown> = {}): DocumentFragment {
     const propsAndStubs = { ...props };
     Object.entries(this.children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
         propsAndStubs[key] = child
           .map((component) => `<div data-id="${component.id}"></div>`)
-          .join("");
+          .join('');
       } else {
         propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
       }
     });
     const fragment = this.#createDocumentElement(
-      "template",
+      'template',
     ) as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
     Object.values(this.children).forEach((child) => {
@@ -187,7 +187,6 @@ class Block {
     return document.createElement(tagName);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   componentDidMount(): void {}
 
   dispatchComponentDidMount(): void {

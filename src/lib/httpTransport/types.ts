@@ -1,10 +1,12 @@
-export enum HttpMethod {
-  Get = "GET",
-  Post = "POST",
-  Put = "PUT",
-  Patch = "PATCH",
-  Delete = "DELETE",
-}
+export const HttpMethods = {
+  Get: 'GET',
+  Post: 'POST',
+  Put: 'PUT',
+  Patch: 'PATCH',
+  Delete: 'DELETE',
+} as const;
+
+export type HttpMethod = (typeof HttpMethods)[keyof typeof HttpMethods];
 
 export type TQueryParams = Record<string, string | number | boolean>;
 

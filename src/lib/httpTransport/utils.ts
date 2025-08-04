@@ -1,6 +1,6 @@
 export const queryStringify = <D =XMLHttpRequestBodyInit>(data: D): string=>  {
   if (!data || typeof data !== 'object') {
-    return ''
+    return '';
   };
   const params = Object.entries(data).map(([key, value]) => {
     if (Array.isArray(value)) {
@@ -9,4 +9,4 @@ export const queryStringify = <D =XMLHttpRequestBodyInit>(data: D): string=>  {
     return `${key}=${value}`;
   });
   return '?' + params.join('&');
-}
+};

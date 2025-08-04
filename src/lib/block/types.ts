@@ -10,9 +10,12 @@ export interface IBlockMeta {
 
 export type TBlockChildren<T = unknown> = Record<string, T | T[]>
 
-export enum BlockEvents {
-    Init =  "init",
-    flowCdm = "flow:component-did-mount",
-    flowCdu = "flow:component-did-update",
-    flowRender = "flow:render"
-};
+export const BlockEvents =  {
+  init: 'init',
+  flowCdm: 'flow:component-did-mount',
+  flowCdu: 'flow:component-did-update',
+  flowRender: 'flow:render'
+} as const;
+
+export type BlockEvent = (typeof BlockEvents)[keyof typeof BlockEvents];
+

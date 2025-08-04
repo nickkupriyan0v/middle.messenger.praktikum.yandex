@@ -1,19 +1,18 @@
 @use "./styles/reset";
 @use "./styles/constants";
-@use "./styles/chats-page";
 
 body {
   background-color: constants.$main-bg-color;
-  margin: initial;
-  padding: initial;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: "Roboto Mono", monospace;
+  margin: initial;
+  min-height: 100vh;
+  padding: initial;
 
   #app {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
   }
 }

@@ -1,15 +1,15 @@
-import { HttpMethod, type IRequestOptions, type THttpRequest, type TQueryParams } from "./types";
-import { queryStringify } from "./utils";
+import { type IRequestOptions, type THttpRequest, type TQueryParams, type HttpMethod, HttpMethods } from './types';
+import { queryStringify } from './utils';
 
 class HTTPTransport {
-  get = this.#createMethod(HttpMethod.Get);
-  post = this.#createMethod(HttpMethod.Post);
-  put = this.#createMethod(HttpMethod.Put);
-  patch = this.#createMethod(HttpMethod.Patch);
-  delete = this.#createMethod(HttpMethod.Delete);
+  get = this.#createMethod(HttpMethods.Get);
+  post = this.#createMethod(HttpMethods.Post);
+  put = this.#createMethod(HttpMethods.Put);
+  patch = this.#createMethod(HttpMethods.Patch);
+  delete = this.#createMethod(HttpMethods.Delete);
 
   #createMethod(method: HttpMethod): THttpRequest {
-    return (url, options = {}) => this.#request(url, { ...options, method });
+    return (url, options = {}) => this.#request(url, { ...options as IRequestOptions<TQueryParams>, method });
   }
 
   #request<R>(
@@ -20,7 +20,7 @@ class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const { method, data, headers, timeout } = options;
 
-      if (method === HttpMethod.Get && data) {
+      if (method === HttpMethods.Get && data) {
         url += queryStringify(data);
       }
 
@@ -34,10 +34,13 @@ class HTTPTransport {
 
       xhr.timeout = timeout;
       xhr.ontimeout = (): void => reject(new Error(`Request timed out after ${timeout}ms`));
-      xhr.onload = (): void => resolve(xhr);
-      xhr.onerror = (): void => reject(new Error("Network error"));
+      xhr.onload = (): void => {
+        const response = JSON.parse(xhr.responseText);
+        resolve(response);
+      };
+      xhr.onerror = (): void => reject(new Error('Network error'));
 
-      if (method !== HttpMethod.Get && data) {
+      if (method !== HttpMethods.Get && data) {
         let body = data;
         if (typeof data === 'object' && !headers['Content-Type']) {
           xhr.setRequestHeader('Content-Type', 'application/json');
