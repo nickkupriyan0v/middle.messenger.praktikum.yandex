@@ -4,7 +4,7 @@ declare module '*.scss' {
   export default styles;
 }
 
-declare module "*.hbs?raw" {
+declare module '*.hbs?raw' {
   const content: string;
   export default content;
 }
