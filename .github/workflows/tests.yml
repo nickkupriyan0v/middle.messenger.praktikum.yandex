@@ -35,20 +35,38 @@ jobs:
         npm install
         npm run start > server.log 2>&1 &
         echo $! > server.pid
-        sleep 5  # Начальная задержка для инициализации
         
-        # Ожидаем готовности сервера
-        timeout 120 bash -c '
-          while ! netstat -lnt | awk \'$4 ~ /:3000$/{exit 0}\'; do sleep 2; done
-          while ! curl -s http://localhost:3000; do sleep 2; done
-        '
+        check_port() {
+          ss -lnt | awk '{print $4}' | grep -q ':3000$'
+        }
+        
+        for i in {1..30}; do
+          if check_port; then
+            echo "Port 3000 is open"
+            break
+          fi
+          sleep 2
+        done
+        
+        for i in {1..30}; do
+          if curl -s http://localhost:3000 >/dev/null; then
+            echo "Server responded successfully"
+            exit 0
+          fi
+          sleep 2
+        done
+        
+        echo "Server startup timed out"
+        exit 1
 
     - name: Check server status
       run: |
-        echo "Checking server status:"
+        echo "Server status:"
         curl -I http://localhost:3000
-        netstat -lnt | grep ':3000'
-        pgrep -F server.pid || echo "Server process not found"
+        echo -e "\nNetwork status:"
+        ss -lnt | grep ':3000' || true
+        echo -e "\nProcess status:"
+        ps -p $(cat server.pid) || true
 
     - name: Run tests (sprint_1)
       if: ${{github.head_ref >= 'sprint_1'}}
