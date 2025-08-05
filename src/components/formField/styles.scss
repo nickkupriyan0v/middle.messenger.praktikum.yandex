@@ -1,0 +1,12 @@
+@use "../../styles/constants";
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .error {
+    color: constants.$error-color;
+    font-size: 12px;
+  }
+}

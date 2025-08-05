@@ -1,0 +1,13 @@
+@use "../../styles/constants";
+
+.my-button {
+  background-color: constants.$main-color;
+  border-radius: constants.$border-radius;
+  padding: constants.$padding;
+  width: 100%;
+
+  &:hover {
+    background-color: constants.$hover-color;
+    cursor: pointer;
+  }
+}

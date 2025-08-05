@@ -1,31 +1,21 @@
-@use "./constants.scss";
+@use "./constants";
 
 .forms-page {
-  flex: 1;
-  display: flex;
   align-items: center;
+  display: flex;
+  flex: 1;
   justify-content: center;
 
   .forms-container {
-    width: 400px;
     display: flex;
     flex-direction: column;
-    gap: constants.$gap_x2;
+    gap: constants.$gap-x2;
+    width: 400px;
 
-    .my_form {
+    .my-form {
       display: flex;
       flex-direction: column;
       gap: constants.$gap;
-    }
-  }
-
-  &.profile-page {
-    position: relative;
-
-    #go-to-chats {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
     }
   }
 }

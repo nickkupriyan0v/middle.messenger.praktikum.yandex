@@ -1,0 +1,26 @@
+@use "../../styles/constants";
+
+.error-page {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+
+  .error-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: constants.$gap;
+
+    .error-code {
+      font-size: 72px;
+    }
+
+    .helper-text {
+      font-size: 32px;
+    }
+
+    .home-link {
+      font-size: 20px;
+    }
+  }
+}
