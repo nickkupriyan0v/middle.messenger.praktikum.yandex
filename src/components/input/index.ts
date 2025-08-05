@@ -28,10 +28,10 @@ class Input extends Block {
     return this.compile(template, { ...this.meta.props });
   }
 
-  validate(callback): void {
+  validate(callback?: (err?: string) => void): void {
     if (this.validationFn) {
       this.error = this.validationFn((this.element as HTMLInputElement)?.value);
-      callback(this.error);
+      callback?.(this.error);
     }
   }
 }

@@ -5,5 +5,5 @@ export interface IInputProps {
   events: Record<string, (e: Event | InputEvent) => void>;
   validationFn?: (value: string) => string | undefined;
   error: string;
-  onValidate: (err: string) => void;
+  onValidate: (err?: string) => void;
 }
