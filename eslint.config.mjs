@@ -4,6 +4,9 @@ import js from "@eslint/js";
 import globals from "globals";
 
 export default [
+  {
+    ignores: ["node_modules/", "dist/", "server.cjs", "vite.config.ts"] 
+  },
   js.configs.recommended,
   {
     files: ["**/*.ts", "**/*.tsx"],
@@ -24,6 +27,6 @@ export default [
       "semi": ["error", "always"],
       "eol-last": ["error", "always"],
       'object-curly-spacing': ['error', 'always']
-    }
+    },
   }
 ];

@@ -1,0 +1,7 @@
+@use "../../styles/constants";
+
+.my-form {
+  display: flex;
+  flex-direction: column;
+  gap: constants.$gap;
+}

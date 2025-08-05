@@ -5,14 +5,17 @@ import Input from '../input';
 import type { IFormFieldProps } from './types';
 
 class FormField extends Block {
-  constructor(props: Partial<IFormFieldProps> = {}) {
+  constructor(props: Partial<IFormFieldProps>) {
     const inputField = new Input({
       name: props.name,
       type: props.type,
-      placeholder: props.placeholder
+      placeholder: props.placeholder,
+      events: props.events,
+      validationFn: props.validationFn,
+      onValidate: (err) => this.setProps({ error: err })
     });
     super('label', {
-      ...props,
+      label: props.label,
       className: 'input-group',
       inputField,
     });

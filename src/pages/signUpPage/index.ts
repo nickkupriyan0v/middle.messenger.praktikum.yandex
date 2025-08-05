@@ -1,37 +1,39 @@
 import Block from '../../lib/block';
 import template from './template.hbs?raw';
 import '../../styles/forms-page.scss';
-import Button from '../../components/button';
-import FormField from '../../components/formField';
 import Link from '../../components/link';
+import type { IFormFieldProps } from '../../components/formField/types';
+import Form from '../../blocks/form';
+import { validateEmail, validateLogin, validateName, validatePassword, validatePhone } from '../../utils/validators';
+
+const SIGN_UP_FIELDS: Partial<IFormFieldProps>[] = [
+  { label: 'Почта', name: 'email', type: 'email', validationFn: validateEmail },
+  { label: 'Логин', name: 'login', validationFn: validateLogin },
+  { label: 'Имя', name: 'first_name', validationFn: validateName },
+  { label: 'Фамилия', name: 'second_name', validationFn: validateName },
+  { label: 'Телефон', name: 'phone', type: 'phone', validationFn: validatePhone },
+  { label: 'Пароль', name: 'password', type: 'password', validationFn: validatePassword },
+  { label: 'Повторите пароль', name: 'repeat_password', type: 'password', validationFn: validatePassword }
+];
 
 class SignUpPage extends Block {
   constructor() {
-    const emailField = new FormField({ label: 'Почта', name: 'email' });
-    const loginField = new FormField({ label: 'Логин', name: 'login' });
-    const firstNameField = new FormField({ label: 'Имя', name: 'first_name' });
-    const secondNameField = new FormField({ label: 'Фамилия', name: 'second_name' });
-    const phoneField = new FormField({ label: 'Телефон', name: 'phone', type: 'phone' });
-    const passwordField = new FormField({ label: 'Пароль', name: 'password', type: 'password' });
-    const repeatPasswordField = new FormField({ label: 'Повторите пароль', name: 'repeat_password', type: 'password' });
-    const signUpButton = new Button({
-      text: 'Регистрация',
-      type: 'submit',
-      events: { click: (event): void => event.preventDefault() }
+    const form = new Form({
+      fields: SIGN_UP_FIELDS,
+      submitButtonText: 'Регистрация',
+      events: { submit: (event) => {
+        event.preventDefault();
+        if (event.currentTarget) {
+          console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
+        }
+      } }
     });
     const signInLink = new Link({ text: 'Вход', events: { click: (event): void => event.preventDefault() } });
     super(
       'main',
       {
         className: 'forms-page',
-        emailField,
-        loginField,
-        firstNameField,
-        secondNameField,
-        phoneField,
-        passwordField,
-        repeatPasswordField,
-        signUpButton,
+        form,
         signInLink,
       }
     );

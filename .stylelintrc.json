@@ -3,7 +3,6 @@
   "plugins": ["stylelint-order"],
   "rules": {
     "order/properties-alphabetical-order": true,
-    "scss/at-import-partial-extension": "always",
     "no-empty-source": null,
     "selector-class-pattern": null
   },
