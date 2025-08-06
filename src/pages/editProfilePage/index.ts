@@ -24,6 +24,9 @@ class EditProfilePage extends Block {
       submitButtonText: 'Сохранить',
       events: { submit: (event) => {
         event.preventDefault();
+        (form.children.fileds as Block[]).forEach(block => {
+          (block.children.inputField as Block).getElement()?.blur();
+        });
         if (event.currentTarget) {
           console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
         }
