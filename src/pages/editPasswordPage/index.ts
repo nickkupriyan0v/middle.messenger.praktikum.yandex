@@ -17,7 +17,7 @@ class EditPasswordPage extends Block {
     const avatar = new Avatar({ letter: 'H', editable: true });
     const form = new Form({
       fields: EDIT_PASSWORD_FIELDS,
-      submitButtonText: 'Сохранить',
+      submitButton: { text: 'Сохранить' },
       events: { submit: (event) => {
         event.preventDefault();
         (form.children.fileds as Block[]).forEach(block => {

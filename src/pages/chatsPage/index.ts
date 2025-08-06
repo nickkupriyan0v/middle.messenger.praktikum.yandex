@@ -6,8 +6,9 @@ import ChatItem from '../../blocks/chat-item';
 import messageItemsMock from '../../mock/messageItems';
 import MessageItem from '../../blocks/message-item';
 import Button from '../../components/button';
-import Input from '../../components/input';
 import { NOOP_CALLBACK } from '../../constants/noop';
+import Form from '../../blocks/form';
+import { validateMessage } from '../../utils/validators';
 
 class ChatsPage extends Block {
   constructor() {
@@ -15,8 +16,20 @@ class ChatsPage extends Block {
     const messageItems = messageItemsMock.map(item => new MessageItem(item));
     const profileButton = new Button({ text: 'Профиль', icon: 'fa-user' });
     const attachButton = new Button({ icon: 'fa-paperclip', events: { click: NOOP_CALLBACK } });
-    const messageInput = new Input({ name: 'message', placeholder: 'Введите сообщение...' });
-    const sendButton = new Button({ icon: 'fa-paper-plane', type:'submit', events: { click: NOOP_CALLBACK }  });
+    const form = new Form({
+      classNames: 'message-form',
+      fields: [{ placeholder: 'Введите сообщение...', name: 'message', validationFn: validateMessage }],
+      submitButton: { text: undefined, icon: 'fa-paper-plane' },
+      events: { submit: (event) => {
+        event.preventDefault();
+        (form.children.fileds as Block[]).forEach(block => {
+          (block.children.inputField as Block).getElement()?.blur();
+        });
+        if (event.currentTarget) {
+          console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
+        }
+      } }
+    });
 
     super(
       'div',
@@ -26,8 +39,7 @@ class ChatsPage extends Block {
         messageItems,
         profileButton,
         attachButton,
-        messageInput,
-        sendButton
+        form
       }
     );
   }

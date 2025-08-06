@@ -35,3 +35,9 @@ export const validatePhone = (phone: string) => validate(
   /^(?:\+?\d{10,15}|\+\d{9,14})$/,
   'от 10 до 15 символов, состоит из цифр, может начинается с плюса'
 );
+
+export const validateMessage = (message: string) => validate(
+  message,
+  /^[\s\S]+$/,
+  'не должно быть пустым.'
+);

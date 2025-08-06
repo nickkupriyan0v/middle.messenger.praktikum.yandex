@@ -44,7 +44,7 @@
   }
 
   .input-container {
-    align-content: center;
+    align-items: flex-start;
     display: flex;
     gap: constants.$gap;
 
@@ -55,5 +55,15 @@
     .my-button {
       width: 40px;
     }
+  }
+}
+
+.message-form {
+  align-items: flex-start;
+  flex: 1;
+  flex-direction: row !important;
+
+  .input-group {
+    flex: 1;
   }
 }

@@ -15,7 +15,7 @@ class SignInPage extends Block {
   constructor() {
     const form = new Form({
       fields: SIGN_IN_FIELDS,
-      submitButtonText: 'Войти',
+      submitButton: { text: 'Войти' },
       events: { submit: (event) => {
         event.preventDefault();
         (form.children.fileds as Block[]).forEach(block => {

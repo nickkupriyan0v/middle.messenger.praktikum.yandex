@@ -20,7 +20,7 @@ class SignUpPage extends Block {
   constructor() {
     const form = new Form({
       fields: SIGN_UP_FIELDS,
-      submitButtonText: 'Регистрация',
+      submitButton: { text: 'Регистрация' },
       events: { submit: (event) => {
         event.preventDefault();
         (form.children.fileds as Block[]).forEach(block => {
