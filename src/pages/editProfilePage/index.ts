@@ -21,9 +21,12 @@ class EditProfilePage extends Block {
     const avatar = new Avatar({ letter: 'H', editable: true });
     const form = new Form({
       fields: EDIT_PROFILE_FIELDS,
-      submitButtonText: 'Сохранить',
+      submitButton: { text: 'Сохранить' },
       events: { submit: (event) => {
         event.preventDefault();
+        (form.children.fileds as Block[]).forEach(block => {
+          (block.children.inputField as Block).getElement()?.blur();
+        });
         if (event.currentTarget) {
           console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
         }

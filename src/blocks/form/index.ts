@@ -8,10 +8,15 @@ import Button from '../../components/button';
 class Form extends Block {
   constructor(props: Partial<IFromProps>) {
     const fileds = props.fields?.map(f => new FormField(f));
-    const submitButton = new Button({ text: props.submitButtonText ?? 'Отправить', type: 'submit' });
+    const submitButton = new Button(
+      Object.assign(
+        { text: 'Отправить', type: 'submit' },
+        props.submitButton || {}
+      )
+    );
     super('form', {
       ...props,
-      className: 'my-form',
+      className: props.classNames ? `my-form ${props.classNames}` :  'my-form',
       fileds,
       submitButton,
     });
