@@ -1,0 +1,7 @@
+@use "../../styles/constants";
+
+.my-input {
+  background-color: constants.$main-color;
+  border-radius: constants.$border-radius;
+  padding: constants.$padding;
+}

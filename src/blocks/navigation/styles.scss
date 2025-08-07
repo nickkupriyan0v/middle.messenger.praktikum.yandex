@@ -1,0 +1,8 @@
+@use "../../styles/constants";
+
+.navigation {
+  align-items: center;
+  display: flex;
+  gap: constants.$gap-x2;
+  justify-content: center;
+}
