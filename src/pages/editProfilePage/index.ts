@@ -5,6 +5,8 @@ import Avatar from '../../components/avatar';
 import type { IFormFieldProps } from '../../components/formField/types';
 import Form from '../../blocks/form';
 import { validateEmail, validateLogin, validateName, validatePhone } from '../../utils/validators';
+import GoToChats from '../../blocks/go-to-chats';
+import { ROUTES } from '../../constants/routes';
 
 const EDIT_PROFILE_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Почта', name: 'email', type: 'email', validationFn: validateEmail },
@@ -19,6 +21,7 @@ const EDIT_PROFILE_FIELDS: Partial<IFormFieldProps>[] = [
 class EditProfilePage extends Block {
   constructor() {
     const avatar = new Avatar({ letter: 'H', editable: true });
+    const goToChats = new GoToChats();
     const form = new Form({
       fields: EDIT_PROFILE_FIELDS,
       submitButton: { text: 'Сохранить' },
@@ -29,6 +32,7 @@ class EditProfilePage extends Block {
         });
         if (event.currentTarget) {
           console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
+          window.router.go(ROUTES.profile);
         }
       } }
     });
@@ -39,6 +43,7 @@ class EditProfilePage extends Block {
         className: 'forms-page',
         avatar,
         form,
+        goToChats,
       }
     );
   }

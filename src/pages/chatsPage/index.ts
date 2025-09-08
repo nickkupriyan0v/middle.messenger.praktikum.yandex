@@ -9,12 +9,13 @@ import Button from '../../components/button';
 import { NOOP_CALLBACK } from '../../constants/noop';
 import Form from '../../blocks/form';
 import { validateMessage } from '../../utils/validators';
+import { ROUTES } from '../../constants/routes';
 
 class ChatsPage extends Block {
   constructor() {
     const chatItems = chatItemsMock.map(item => new ChatItem(item));
     const messageItems = messageItemsMock.map(item => new MessageItem(item));
-    const profileButton = new Button({ text: 'Профиль', icon: 'fa-user' });
+    const profileButton = new Button({ text: 'Профиль', icon: 'fa-user', events: { click: () => window.router.go(ROUTES.profile) } });
     const attachButton = new Button({ icon: 'fa-paperclip', events: { click: NOOP_CALLBACK } });
     const form = new Form({
       classNames: 'message-form',

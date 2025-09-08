@@ -9,13 +9,24 @@ import SignUpPage from '../pages/signUpPage';
 
 export interface IRoute { name: string, component: Block }
 
-export const ROUTES = [
-  { name: '404', component: new ErrorPage({ code: '404', text: 'Вы вошли не в ту дверь' }) },
-  { name: '500', component: new ErrorPage({ code: '500', text: 'Наташ, мы там все уронили' }) },
-  { name: 'Регистарция', component: new SignUpPage() },
-  { name: 'Вход', component: new SignInPage() },
-  { name: 'Чаты', component: new ChatsPage() },
-  { name: 'Профиль', component: new ProfilePage() },
-  { name: 'Редактирование профиля', component: new EditProfilePage() },
-  { name: 'Редактирование пароля', component: new EditPasswordPage() },
+export const ROUTES = {
+  notFound: '/404',
+  serverDown: '/500',
+  signUp: '/sign-up',
+  signIn: '/sign-in',
+  chats: '/chats',
+  profile: '/profile',
+  editProfile: '/edit-profile',
+  editPassword: '/edit-password',
+} as const;
+
+export const ROUTES_MAPPING = [
+  { pathname: ROUTES.notFound, component: ErrorPage },
+  { pathname: ROUTES.serverDown, component: ErrorPage },
+  { pathname: ROUTES.signUp, component: SignUpPage },
+  { pathname: ROUTES.signIn, component: SignInPage },
+  { pathname: ROUTES.chats, component: ChatsPage },
+  { pathname: ROUTES.profile, component: ProfilePage },
+  { pathname: ROUTES.editProfile, component: EditProfilePage },
+  { pathname: ROUTES.editPassword, component: EditPasswordPage },
 ];

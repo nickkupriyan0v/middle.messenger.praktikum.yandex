@@ -5,6 +5,7 @@ import Link from '../../components/link';
 import Form from '../../blocks/form';
 import { validateLogin, validatePassword } from '../../utils/validators';
 import type { IFormFieldProps } from '../../components/formField/types';
+import { ROUTES } from '../../constants/routes';
 
 const SIGN_IN_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Логин', name: 'login', validationFn: validateLogin },
@@ -23,10 +24,14 @@ class SignInPage extends Block {
         });
         if (event.currentTarget) {
           console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
+          window.router.go(ROUTES.chats);
         }
       } }
     });
-    const registrationLink = new Link({ text: 'Регистрация', events: { click: (event): void => event.preventDefault() } });
+    const registrationLink = new Link({ text: 'Регистрация', events: { click: (event): void => {
+      event.preventDefault();
+      window.router.go(ROUTES.signUp);
+    } } });
     super(
       'main',
       {

@@ -5,6 +5,7 @@ import Link from '../../components/link';
 import type { IFormFieldProps } from '../../components/formField/types';
 import Form from '../../blocks/form';
 import { validateEmail, validateLogin, validateName, validatePassword, validatePhone } from '../../utils/validators';
+import { ROUTES } from '../../constants/routes';
 
 const SIGN_UP_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Почта', name: 'email', type: 'email', validationFn: validateEmail },
@@ -28,10 +29,11 @@ class SignUpPage extends Block {
         });
         if (event.currentTarget) {
           console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
+          window.router.go(ROUTES.chats);
         }
       } }
     });
-    const signInLink = new Link({ text: 'Вход', events: { click: (event): void => event.preventDefault() } });
+    const signInLink = new Link({ text: 'Вход', events: { click: (): void => window.router.go(ROUTES.signIn) } });
     super(
       'main',
       {
