@@ -1,3 +1,5 @@
+import { updateAvatar } from '../../services/user';
+
 const avatarChangeHandlers = new WeakMap<HTMLInputElement, (event: Event) => void>();
 
 export const handleAvatarClick = (event: Event): void => {
@@ -19,18 +21,7 @@ export const handleAvatarClick = (event: Event): void => {
     if (!file) {
       return;
     };
-
-    const reader = new FileReader();
-    reader.onload = ({ target }): void => {
-      if (target?.result) {
-        const img = avatar.querySelector('img');
-        if (img) {
-          img.src = target.result as string;
-          img.style.display = 'block';
-        }
-      }
-    };
-    reader.readAsDataURL(file);
+    updateAvatar(file);
   };
 
   uploader.addEventListener('change', callback);

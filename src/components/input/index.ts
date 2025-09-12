@@ -14,6 +14,7 @@ class Input extends Block {
       className: 'my-input',
       attrs: {
         name: props.name,
+        value: props.value,
         type: props.type ?? 'text',
         placeholder: props.placeholder
       },
