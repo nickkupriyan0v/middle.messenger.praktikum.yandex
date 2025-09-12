@@ -1,16 +1,19 @@
 import Block from '../../lib/block';
 import template from './template.hbs?raw';
 import './styles.scss';
-import type { IChatItemProps } from './types';
 import Avatar from '../../components/avatar';
+import type { IChat } from '../../models/chat';
+import { normalizeTime } from '../../utils/normalize-time';
 
 class ChatItem extends Block {
-  constructor(props: Partial<IChatItemProps>) {
-    const avatar = new Avatar({ letter: 'H' });
+  constructor(props: { chat: IChat, onClick: () => void }) {
+    const avatar = new Avatar({ editable: false });
     super('article', {
       ...props,
+      events: { 'click': props.onClick },
       className: 'chat-item',
       avatar,
+      lastMsgTime: normalizeTime(props.chat.last_message?.time)
     });
   }
   

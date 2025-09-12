@@ -89,7 +89,6 @@ class Router {
 
   #onRoute(pathname: string) {
     const route = this.getRoute(pathname);
-    console.log(route);
     if (!route) {
       const notFoundRoute = this.getRoute(ROUTES.notFound);
       if (notFoundRoute) {

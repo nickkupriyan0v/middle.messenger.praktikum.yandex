@@ -1,12 +1,12 @@
 import Block from '../../lib/block';
 import template from './template.hbs?raw';
 import '../../styles/forms-page.scss';
-import Avatar from '../../components/avatar';
 import type { IFormFieldProps } from '../../components/formField/types';
 import { validatePassword } from '../../utils/validators';
 import Form from '../../blocks/form';
 import GoToChats from '../../blocks/go-to-chats';
-import { ROUTES } from '../../constants/routes';
+import { changePassword } from '../../services/user';
+import type { IChangePassData } from '../../api/user/types';
 
 const EDIT_PASSWORD_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Старый пароль', name: 'oldPassword', type: 'password', validationFn: validatePassword },
@@ -16,7 +16,6 @@ const EDIT_PASSWORD_FIELDS: Partial<IFormFieldProps>[] = [
 
 class EditPasswordPage extends Block {
   constructor() {
-    const avatar = new Avatar({ letter: 'H', editable: true });
     const goToChats = new GoToChats();
     const form = new Form({
       fields: EDIT_PASSWORD_FIELDS,
@@ -27,8 +26,8 @@ class EditPasswordPage extends Block {
           (block.children.inputField as Block).getElement()?.blur();
         });
         if (event.currentTarget) {
-          console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
-          window.router.go(ROUTES.profile);
+          const data = Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries());
+          changePassword(data as unknown as IChangePassData);
         }
       } }
     });
@@ -37,7 +36,6 @@ class EditPasswordPage extends Block {
       'main',
       {
         className: 'forms-page',
-        avatar,
         form,
         goToChats,
       }

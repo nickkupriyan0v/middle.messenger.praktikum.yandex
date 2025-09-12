@@ -6,6 +6,8 @@ import Form from '../../blocks/form';
 import { validateLogin, validatePassword } from '../../utils/validators';
 import type { IFormFieldProps } from '../../components/formField/types';
 import { ROUTES } from '../../constants/routes';
+import { signIn } from '../../services/auth';
+import type { ISignInData } from '../../api/auth/types';
 
 const SIGN_IN_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Логин', name: 'login', validationFn: validateLogin },
@@ -23,8 +25,8 @@ class SignInPage extends Block {
           (block.children.inputField as Block).getElement()?.blur();
         });
         if (event.currentTarget) {
-          console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
-          window.router.go(ROUTES.chats);
+          const data = Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries());
+          signIn(data as unknown as ISignInData);
         }
       } }
     });

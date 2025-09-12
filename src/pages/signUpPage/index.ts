@@ -6,6 +6,8 @@ import type { IFormFieldProps } from '../../components/formField/types';
 import Form from '../../blocks/form';
 import { validateEmail, validateLogin, validateName, validatePassword, validatePhone } from '../../utils/validators';
 import { ROUTES } from '../../constants/routes';
+import { signUp } from '../../services/auth';
+import type { ISignUpData } from '../../api/auth/types';
 
 const SIGN_UP_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Почта', name: 'email', type: 'email', validationFn: validateEmail },
@@ -28,8 +30,8 @@ class SignUpPage extends Block {
           (block.children.inputField as Block).getElement()?.blur();
         });
         if (event.currentTarget) {
-          console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
-          window.router.go(ROUTES.chats);
+          const data = Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries());
+          signUp(data as unknown as ISignUpData);
         }
       } }
     });

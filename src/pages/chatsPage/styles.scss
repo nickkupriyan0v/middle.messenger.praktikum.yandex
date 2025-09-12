@@ -37,23 +37,28 @@
     }
   }
 
-  .chat-area {
+  .selected-chat {
     display: flex;
-    flex-direction: column;
-    gap: constants.$gap;
-  }
 
-  .input-container {
-    align-items: flex-start;
-    display: flex;
-    gap: constants.$gap;
-
-    .my-input {
-      flex: 1;
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: constants.$gap;
     }
-
-    .my-button {
-      width: 40px;
+  
+    .input-container {
+      align-items: flex-start;
+      display: flex;
+      gap: constants.$gap;
+  
+      .my-input {
+        flex: 1;
+      }
+  
+      .my-button {
+        width: 40px;
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-import type Block from '../lib/block';
 import ChatsPage from '../pages/chatsPage';
 import EditPasswordPage from '../pages/editPasswordPage';
 import EditProfilePage from '../pages/editProfilePage';
@@ -7,18 +6,16 @@ import ProfilePage from '../pages/profilePage';
 import SignInPage from '../pages/signInPage';
 import SignUpPage from '../pages/signUpPage';
 
-export interface IRoute { name: string, component: Block }
-
 export const ROUTES = {
   notFound: '/404',
   serverDown: '/500',
   signUp: '/sign-up',
-  signIn: '/sign-in',
-  chats: '/chats',
+  signIn: '/',
+  chats: '/messenger',
   profile: '/profile',
   editProfile: '/edit-profile',
   editPassword: '/edit-password',
-} as const;
+};
 
 export const ROUTES_MAPPING = [
   { pathname: ROUTES.notFound, component: ErrorPage },
@@ -30,3 +27,9 @@ export const ROUTES_MAPPING = [
   { pathname: ROUTES.editProfile, component: EditProfilePage },
   { pathname: ROUTES.editPassword, component: EditPasswordPage },
 ];
+
+export const UNATHORIZE_ROUTES = [
+  ROUTES.signIn,
+  ROUTES.signUp,
+];
+

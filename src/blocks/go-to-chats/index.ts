@@ -8,7 +8,10 @@ class GoToChats extends Block {
   constructor() {
     const chatsLink = new Link({
       text: 'К чатам',
-      events: { click: (): void => window.router.go(ROUTES.chats) }
+      events: { click: (event): void => {
+        event.preventDefault();
+        window.router.go(ROUTES.chats);
+      } }
     });
     super('div', { className: 'go-to-chats', chatsLink });
   }
