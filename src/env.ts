@@ -12,6 +12,3 @@ export const API_MAPPING = {
   chats: `${API_BASE_URL}/chats`,
   user: `${API_BASE_URL}/user`,
 };
-
-
-// https://ya-praktikum.tech/api/v2/resources${user.avatar}
