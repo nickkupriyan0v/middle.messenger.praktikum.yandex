@@ -1,4 +1,4 @@
-import HTTPTransport from '../../lib/httpTransport';
+import HTTPTransport from '../../lib/http-transport';
 import { API_MAPPING } from '../../env';
 import type { ISignInData, ISignUpData } from './types';
 import type { IUser } from '../../models/user';

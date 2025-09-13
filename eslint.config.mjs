@@ -5,7 +5,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["node_modules/", "dist/", "server.cjs", "vite.config.ts"] 
+    ignores: ["node_modules/", "dist/", "server.cjs", "vite.config.ts", "vitest.config.ts"] 
   },
   js.configs.recommended,
   {

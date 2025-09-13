@@ -11,6 +11,7 @@ import withStore from '../../lib/store/utils';
 import type { IAppState } from '../../lib/store/types';
 import { PROFILE_FIELDS_MAPPING, PROFILE_FILEDS } from '../../constants/profile-fields';
 import type { IUser } from '../../models/user';
+import { updateAvatar } from '../../services/user';
 
 class ProfilePage extends Block {
   constructor() {
@@ -37,7 +38,7 @@ class ProfilePage extends Block {
     const { user } = this.meta.props;
     if (user) {
       this.children['rows'] = Object.values(PROFILE_FILEDS).map(field => new ProfileRow({ title: PROFILE_FIELDS_MAPPING[field], value: (user as IUser)[field] }));
-      this.children['avatar']  = new Avatar({ editable: true, avatar: (user as IUser).avatar });
+      this.children['avatar']  = new Avatar({ editable: true, avatar: (user as IUser).avatar, callBack: (file: File) => updateAvatar(file) });
 
     }
     return this.compile(template, this.meta.props);

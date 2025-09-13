@@ -1,8 +1,6 @@
-import { updateAvatar } from '../../services/user';
-
 const avatarChangeHandlers = new WeakMap<HTMLInputElement, (event: Event) => void>();
 
-export const handleAvatarClick = (event: Event): void => {
+export const handleAvatarClick = (event: Event, callBack: (file: File) => void): void => {
   const avatar = event.currentTarget as HTMLElement;
   const uploader = avatar.querySelector('input');
   if (!uploader) {
@@ -21,7 +19,7 @@ export const handleAvatarClick = (event: Event): void => {
     if (!file) {
       return;
     };
-    updateAvatar(file);
+    callBack(file);
   };
 
   uploader.addEventListener('change', callback);

@@ -4,6 +4,7 @@
   background-color: constants.$main-color;
   border-radius: constants.$border-radius;
   display: flex;
+  gap: 8px;
   padding: constants.$padding;
 
   .chat-info {

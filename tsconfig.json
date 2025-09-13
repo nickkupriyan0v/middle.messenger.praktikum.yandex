@@ -23,5 +23,5 @@
     "sourceMap": true,
     "strictNullChecks": true
   },
-  "include": ["src", "@types"]
+  "include": ["src", "@types", "vitest-setup.ts"]
 }
