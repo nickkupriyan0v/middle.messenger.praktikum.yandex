@@ -2,7 +2,7 @@ import { ROUTES } from '../../constants/routes';
 import type Block from '../block';
 import type { RouteProps } from './types';
 
-class Route {
+export class Route {
   #pathname: string;
   #blockClass: typeof Block;
   #block: Block | null;
@@ -85,6 +85,10 @@ class Router {
 
   getRoute(pathname: string) {
     return this.#routes.find(route => route.match(pathname));
+  }
+
+  onRoute(pathname: string) {
+    this.#onRoute(pathname);
   }
 
   #onRoute(pathname: string) {

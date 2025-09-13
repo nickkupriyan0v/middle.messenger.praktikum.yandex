@@ -1,5 +1,5 @@
 import { API_MAPPING } from '../../env';
-import HTTPTransport from '../../lib/httpTransport';
+import HTTPTransport from '../../lib/http-transport';
 import type { IUser } from '../../models/user';
 import type { IChangePassData } from './types';
 

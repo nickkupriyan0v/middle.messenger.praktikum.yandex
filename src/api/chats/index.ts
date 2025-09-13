@@ -1,4 +1,4 @@
-import HTTPTransport from '../../lib/httpTransport';
+import HTTPTransport from '../../lib/http-transport';
 import type { IChat } from '../../models/chat';
 import { API_MAPPING } from '../../env';
 import type { IUserAdditionToChatData, IUserDeletionToChatData } from './types';
