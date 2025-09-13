@@ -3,7 +3,7 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from 'handlebars';
 import { type TBlockChildren, type IBlockMeta, type IBlockProps, BlockEvents } from './types.ts';
 
-abstract class Block<T extends Partial<IBlockProps> = Partial<IBlockProps>> {
+class Block<T extends Partial<IBlockProps> = Partial<IBlockProps>> {
   protected meta: IBlockMeta;
   protected element: HTMLElement | null = null;
   protected eventBus: EventBus;
@@ -11,7 +11,7 @@ abstract class Block<T extends Partial<IBlockProps> = Partial<IBlockProps>> {
 
   children: TBlockChildren<Block> = {};
 
-  constructor(tagName = 'div', propsAndChildren: T) {
+  constructor(tagName = 'div', propsAndChildren: T = {} as T) {
     this.eventBus = new EventBus();
     this.id = makeUUID();
     const { props, children } = this.#getChildren(propsAndChildren);

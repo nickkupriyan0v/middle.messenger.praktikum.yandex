@@ -1,10 +1,14 @@
 import Block from '../../lib/block';
 import template from './template.hbs?raw';
 import '../../styles/forms-page.scss';
-import Avatar from '../../components/avatar';
 import type { IFormFieldProps } from '../../components/formField/types';
 import Form from '../../blocks/form';
 import { validateEmail, validateLogin, validateName, validatePhone } from '../../utils/validators';
+import GoToChats from '../../blocks/go-to-chats';
+import type { IAppState } from '../../lib/store/types';
+import withStore from '../../lib/store/utils';
+import { editProfile } from '../../services/user';
+import type { IUser } from '../../models/user';
 
 const EDIT_PROFILE_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Почта', name: 'email', type: 'email', validationFn: validateEmail },
@@ -15,37 +19,45 @@ const EDIT_PROFILE_FIELDS: Partial<IFormFieldProps>[] = [
   { label: 'Телефон', name: 'phone', type: 'phone', validationFn: validatePhone },
 ];
 
-
 class EditProfilePage extends Block {
   constructor() {
-    const avatar = new Avatar({ letter: 'H', editable: true });
-    const form = new Form({
-      fields: EDIT_PROFILE_FIELDS,
-      submitButton: { text: 'Сохранить' },
-      events: { submit: (event) => {
-        event.preventDefault();
-        (form.children.fileds as Block[]).forEach(block => {
-          (block.children.inputField as Block).getElement()?.blur();
-        });
-        if (event.currentTarget) {
-          console.log(Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()));
-        }
-      } }
-    });
+    const goToChats = new GoToChats();
 
     super(
       'main',
       {
         className: 'forms-page',
-        avatar,
-        form,
+        goToChats,
       }
     );
   }
 
   render(): DocumentFragment {
-    return this.compile(template);
+    const { user } = this.meta.props as {user: IUser};
+
+    this.children['form'] = new Form({
+      fields:  EDIT_PROFILE_FIELDS.map(item => {
+        if (user) {
+          const name: keyof IUser = item.name as keyof IUser;
+          const value = user[name];
+          return { ...item, value };
+        }
+        return item;
+      }),
+      submitButton: { text: 'Сохранить' },
+      events: { submit: (event) => {
+        event.preventDefault();
+        if (event.currentTarget) {
+          const data = Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries());
+          editProfile(data as unknown as IUser);
+        }
+      } }
+    });
+
+    return this.compile(template, this.meta.props);
   }
 }
 
-export default EditProfilePage;
+const mapStateToProps = ({ user }: Partial<IAppState>) => ({ user });
+
+export default withStore(EditProfilePage, mapStateToProps);

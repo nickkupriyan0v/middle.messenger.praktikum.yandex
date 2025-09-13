@@ -2,6 +2,8 @@
   {{letter}}
 </span>
 {{#if editable}}
-  <img class="preview-image" />
+  {{#if avatar}}
+    <img class="preview-image" src="{{src}}" />
+  {{/if}}
   <input type="file" accept="image/*" hidden name="avatar" id="avatar-uploader-input" />
 {{/if}}
