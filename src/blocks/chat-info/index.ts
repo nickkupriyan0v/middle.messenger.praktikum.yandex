@@ -4,7 +4,7 @@ import './styles.scss';
 import Button from '../../components/button';
 import withStore from '../../lib/store/utils';
 import type { IAppState } from '../../lib/store/types';
-import { addUserToChat, deleteUserFromChat } from '../../services/chats';
+import { addUserToChat, deleteChat, deleteUserFromChat } from '../../services/chats';
 import type { IUser } from '../../models/user';
 import ChatUser from '../chat-user';
 import type { IChat } from '../../models/chat';
@@ -16,7 +16,11 @@ class ChatInfo extends Block {
       addUserToChat(newUser as string, (this.meta.props.selectedChat as IChat).id);
     } } });
 
-    super('aside', { className: 'chat-aside', addUserBtn });
+    const deleteChatBtn = new Button({ icon: 'fa-trash', text: 'Удалить чат', events: { click: () => {
+      deleteChat((this.meta.props.selectedChat as IChat).id);
+    } } });
+
+    super('aside', { className: 'chat-aside', addUserBtn, deleteChatBtn });
   }
 
   render(): DocumentFragment {
