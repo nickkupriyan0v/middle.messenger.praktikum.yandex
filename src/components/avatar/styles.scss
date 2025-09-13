@@ -12,12 +12,11 @@
   justify-content: center;
   margin-right: 15px;
   overflow: hidden;
-  width: 48px;
+  width: 72px;
 
   &.editable {
     margin-right: initial;
     position: relative;
-    width: 96px;
 
     .preview-image {
       height: 100%;
