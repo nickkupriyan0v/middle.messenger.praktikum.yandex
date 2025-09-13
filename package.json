@@ -14,7 +14,8 @@
     "lint:style": "stylelint \"src/**/*.{css,scss}\"",
     "lint:style:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
     "test": "vitest",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
